@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador Sistema Externo - Lightning Out</title>
+</head>
+<body>
+    <!-- Onde o LWC será renderizado -->
+    <div id="lightning-container"></div>
+
+    <!-- 1. Carrega a biblioteca do Lightning Out diretamente do seu Site -->
+    <script src="mvsistemas2021--dnexuscp.sandbox.my.site.com"></script>
+
+    <script>
+        // 2. Configurações
+        const siteUrl = 'mvsistemas2021--dnexuscp.sandbox.my.site.com';
+        const auraAppName = 'c:GuestOutApp'; // Nome do App Aura que você criou
+        const componentName = 'c:contactUpdatePage'; // Substitua pelo nome do seu LWC
+
+        $Lightning.use(
+            auraAppName, 
+            function() {
+                $Lightning.createComponent(
+                    componentName,
+                    {}, // Atributos do LWC (se houver)
+                    "lightning-container", // ID do elemento onde será inserido
+                    function(cmp) {
+                        console.log("LWC carregado com sucesso como Guest User!");
+                    }
+                );
+            },
+            siteUrl // Endpoint do site para contexto de Guest User
+        );
+    </script>
+</body>
+</html>
