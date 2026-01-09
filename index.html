@@ -11,24 +11,22 @@
 
     <script>
         const siteUrl = 'https://creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com/portalaura';
-
-        console.log("Iniciando Lightning Out...");
+        const urlParams = new URLSearchParams(window.location.search);
+        const tokenValue = urlParams.get('token');
+        const emailValue = urlParams.get('email');
         
         $Lightning.use(
             "c:GuestOutApp", 
             function() {
-                console.log("Conectado ao Aura App. Tentando criar componente...");
                 $Lightning.createComponent(
                     "c:contactUpdatePage", 
-                    {}, 
+                    {
+                        token: tokenValue,
+                        email: emailValue
+                    }, 
                     "lightning-container",
-                    function(cmp, status, errorMessage) {
-                        console.log("Status da criação:", status);
-                        if (status === "SUCCESS") {
-                            console.log("Componente criado com sucesso!");
-                        } else {
-                            console.error("Erro na criação:", errorMessage);
-                        }
+                    function(cmp) {
+                        console.log("Componente criado com sucesso!");
                     }
                 );
             },
