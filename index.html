@@ -19,14 +19,16 @@
             "c:GuestOutApp", 
             function() {
                 $Lightning.createComponent(
-                    "c:contactUpdatePage", 
-                    {
-                        token: tokenValue,
-                        email: emailValue
-                    }, 
+                    "lightning:flow", 
+                    {}, 
                     "lightning-container",
-                    function(cmp) {
-                        console.log("Componente criado com sucesso!");
+                    function(component) {
+                        const inputVariables = [
+                            { name: 'token', type: 'String', value: tokenValue },
+                            { name: 'email', type: 'String', value: emailValue }
+                        ];
+
+                        component.startFlow("Atualizar_Contato_Flow", inputVariables);
                     }
                 );
             },
