@@ -2,35 +2,41 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Simulador Sistema Externo - Lightning Out</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador LWC - Trailhead Playground</title>
 </head>
 <body>
-    <!-- Onde o LWC será renderizado -->
-    <div id="lightning-container"></div>
+    <div id="lightning-container">
+        <p>Carregando componente...</p>
+    </div>
 
-    <!-- 1. Carrega a biblioteca do Lightning Out diretamente do seu Site -->
-    <script src="mvsistemas2021--dnexuscp.sandbox.my.site.com"></script>
+    <!-- No LWR, o caminho costuma ser direto no domínio ou no subcaminho do site -->
+    <!-- Tentaremos o caminho padrão para sites Experience Cloud -->
+    <script src="creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com"></script>
 
     <script>
-        // 2. Configurações
-        const siteUrl = 'mvsistemas2021--dnexuscp.sandbox.my.site.com';
-        const auraAppName = 'c:GuestOutApp'; // Nome do App Aura que você criou
-        const componentName = 'c:contactUpdatePage'; // Substitua pelo nome do seu LWC
+        const siteUrl = 'https://creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com';
+        const auraAppName = 'c:GuestOutApp'; 
+        const componentName = 'c:contactUpdatePage'; // Verifique se o nome está correto
 
-        $Lightning.use(
-            auraAppName, 
-            function() {
-                $Lightning.createComponent(
-                    componentName,
-                    {}, // Atributos do LWC (se houver)
-                    "lightning-container", // ID do elemento onde será inserido
-                    function(cmp) {
-                        console.log("LWC carregado com sucesso como Guest User!");
-                    }
-                );
-            },
-            siteUrl // Endpoint do site para contexto de Guest User
-        );
+        try {
+            $Lightning.use(
+                auraAppName,
+                function() {
+                    $Lightning.createComponent(
+                        componentName,
+                        {}, 
+                        "lightning-container",
+                        function(cmp) {
+                            console.log("LWC carregado no LWR com sucesso!");
+                        }
+                    );
+                },
+                siteUrl
+            );
+        } catch (error) {
+            console.error("Erro ao inicializar Lightning Out: ", error);
+        }
     </script>
 </body>
 </html>
