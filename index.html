@@ -11,16 +11,24 @@
 
     <script>
         const siteUrl = 'https://creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com/portalaura';
+
+        console.log("Iniciando Lightning Out...");
         
         $Lightning.use(
             "c:GuestOutApp", 
             function() {
+                console.log("Conectado ao Aura App. Tentando criar componente...");
                 $Lightning.createComponent(
                     "c:contactUpdatePage", 
                     {}, 
                     "lightning-container",
-                    function(cmp) {
-                        console.log("Sucesso: LWC carregado via Aura!");
+                    function(cmp, status, errorMessage) {
+                        console.log("Status da criação:", status);
+                        if (status === "SUCCESS") {
+                            console.log("Componente criado com sucesso!");
+                        } else {
+                            console.error("Erro na criação:", errorMessage);
+                        }
                     }
                 );
             },
