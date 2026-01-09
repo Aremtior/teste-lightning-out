@@ -2,41 +2,31 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador LWC - Trailhead Playground</title>
+    <title>Simulador Externo Aura</title>
 </head>
 <body>
-    <div id="lightning-container">
-        <p>Carregando componente...</p>
-    </div>
+    <div id="lightning-container">Carregando no modo Aura...</div>
 
-    <!-- No LWR, o caminho costuma ser direto no domínio ou no subcaminho do site -->
-    <!-- Tentaremos o caminho padrão para sites Experience Cloud -->
-    <script src="https://creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com/sfsites/c/lightning/lightning.out.js"></script>
+    <script src="https://creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com/portalaura/lightning/lightning.out.js"></script>
 
     <script>
-        const siteUrl = 'https://creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com';
-        const auraAppName = 'c:GuestOutApp'; 
-        const componentName = 'c:contactUpdatePage'; // Verifique se o nome está correto
-
-        try {
-            $Lightning.use(
-                auraAppName,
-                function() {
-                    $Lightning.createComponent(
-                        componentName,
-                        {}, 
-                        "lightning-container",
-                        function(cmp) {
-                            console.log("LWC carregado no LWR com sucesso!");
-                        }
-                    );
-                },
-                siteUrl
-            );
-        } catch (error) {
-            console.error("Erro ao inicializar Lightning Out: ", error);
-        }
+        // SITE URL: REMOVA OS ESPAÇOS ABAIXO
+        const siteUrl = 'https://creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com/portalaura';
+        
+        $Lightning.use(
+            "c:GuestOutApp", 
+            function() {
+                $Lightning.createComponent(
+                    "c:contactUpdatePage", 
+                    {}, 
+                    "lightning-container",
+                    function(cmp) {
+                        console.log("Sucesso: LWC carregado via Aura!");
+                    }
+                );
+            },
+            siteUrl
+        );
     </script>
 </body>
 </html>
