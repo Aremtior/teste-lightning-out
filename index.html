@@ -23,9 +23,17 @@
                     {}, 
                     "lightning-container",
                     function(component) {
-                        const inputVariables = [
-                            { name: 'token', type: 'String', value: tokenValue },
-                            { name: 'email', type: 'String', value: emailValue }
+                        const inputVariables = const inputVariables = [
+                            { 
+                                name: 'recordId',
+                                type: 'String', 
+                                value: tokenValue 
+                            },
+                            { 
+                                name: 'email', 
+                                type: 'String', 
+                                value: emailValue 
+                            }
                         ];
 
                         component.startFlow("Atualizar_Contato_Flow", inputVariables);
