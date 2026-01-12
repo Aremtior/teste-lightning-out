@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Simulador Externo Aura</title>
+
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background-color: #f4f7f9; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .main-container { display: flex; gap: 20px; justify-content: space-around; flex-wrap: wrap; }
+        .card { 
+            background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px; flex: 1; min-width: 350px; border-top: 5px solid #00a1e0;
+        }
+        h2 { color: #16325c; font-size: 1.2rem; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+    </style>
 </head>
 <body>
-    <div id="lightning-container"></div>
+    <div class="header">
+        <h1>Alterar cadastro Contato</h1>
+    </div>
+
+    <div class="main-container">
+        <!-- Coluna do LWC -->
+        <div class="card">
+            <h2>Alterações via LWC</h2>
+            <div id="lwc-host"></div>
+        </div>
+
+        <!-- Coluna do Flow -->
+        <div class="card">
+            <h2>Alterações via Flow</h2>
+            <div id="flow-host"></div>
+        </div>
+    </div>
 
     <script src="https://creative-otter-3dbvzj-dev-ed.trailblaze.my.site.com/portalaura/lightning/lightning.out.js"></script>
 
@@ -19,9 +46,18 @@
             "c:GuestOutApp", 
             function() {
                 $Lightning.createComponent(
+                    "c:contactUpdatePage", 
+                    {
+                        token: tokenValue,
+                        email: emailValue
+                    },  
+                    "lwc-host",
+                    function(cmp) { console.log("LWC carregado com sucesso!"); }
+                );
+                $Lightning.createComponent(
                     "lightning:flow", 
                     {}, 
-                    "lightning-container",
+                    "flow-host",
                     function(component) {
                         const inputVariables = [
                             { 
